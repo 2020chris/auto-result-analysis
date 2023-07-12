@@ -1,0 +1,7 @@
+/.ipynb_checkpoints/
+/images/
+src/__pycache__/
+/dataset/
+*.parquet
+*.csv
+/analysis-env/

@@ -5,7 +5,7 @@ data:
   data_dir: /dbfs/mnt/s3_mount/qe_automation/data
  # data_dir: /dbfs/FileStore/shared_uploads/Chris.Jose@cvent.com
   images_folder: images
-  full_dataset: merged_five_months.parquet
+  full_dataset: data_optimized_proc.parquet
 #  full_dataset: subset.csv 
   train_dataset: train_dataset.csv
   test_dataset: test_dataset.csv
@@ -39,6 +39,8 @@ train:
   model_repo: /dbfs/mnt/s3_mount/qe_automation/model_repository/
   resume: /dbfs/mnt/s3_mount/qe_automation/checkpoints/model_best.pth.tar
   seed: 12345
+  freeze_text_encoder: True
+  freeze_image_encoder: True
   num_train_epochs: 50
   learning_rate: 5.0e-5
   weight_decay: 0.0

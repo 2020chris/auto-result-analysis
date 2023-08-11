@@ -495,7 +495,7 @@ class MultimodalFusionModel(nn.Module):
 
         # freeze backbone layers
         for param in self.text_encoder.parameters():
-            param.requires_grad = False
+            param.requires_grad = self.config["train"]["freeze_text_encoder"]
        # for param in self.image_encoder.parameters():
             #param.requires_grad = False
 

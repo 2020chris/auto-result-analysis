@@ -463,9 +463,9 @@ class MultimodalFusionModel(nn.Module):
 
         # freeze backbone layers
         for param in self.text_encoder.parameters():
-            param.requires_grad = False
+            param.requires_grad = self.config["train"]["freeze_text_encoder"]
         for param in self.image_encoder.parameters():
-            param.requires_grad = False
+            param.requires_grad = self.config["train"]["freeze_image_encoder"]
 
         self.late_fusion = nn.Sequential(
             nn.Linear(in_features=self.text_encoder.config.hidden_size + self.image_encoder.config.hidden_size, out_features = intermediate_dims),
@@ -493,7 +493,7 @@ class MultimodalFusionModel(nn.Module):
     def gen_embeddings_sliding_window(self, input_ids_list, attention_mask_list):  
         """
         BERT is restricted to consuming 512 tokens per sample - extract a window from input_ids and attention_mask, append the start/separater tokens, add padding, format into dictionary containing a stacked tensors
-        Other approach - truncate/select most relevant 512 tokens
+        Other approach - truncate/select most relevant 512 tokens after removing extraneous keys
 
         """
         max_length = self.config["tokenizer"]["max_length"]  
@@ -1281,6 +1281,10 @@ torch.cuda.memory_summary(device=None, abbreviated=False)
 # COMMAND ----------
 
 # MAGIC %md ### Deployment 
+# MAGIC
+# MAGIC https://towardsaws.com/deploying-an-nvidia-triton-inference-server-on-amazon-ecs-ca6f0bebfcc8 
+# MAGIC
+# MAGIC https://github.com/triton-inference-server
 
 # COMMAND ----------
 

@@ -1,7 +1,6 @@
 # auto-result-analysis - AUTO-65515
 Automate Blucumber test result analysis with ML
 
-https://wiki.cvent.com/pages/viewpage.action?pageId=573872491
 
 # File structure
 fetch_data.py - script to fetch steplogs from mysql qe_automation db

@@ -130,7 +130,6 @@ def encode_label(x):
         encode_dict[x] = len(encode_dict)
     return encode_dict[x]
 
-#df = pd.read_csv('/dbfs/FileStore/shared_uploads/Chris.Jose@cvent.com/subset.csv')
 df = pd.read_parquet('/dbfs/FileStore/tables/data_optimized_proc.parquet')
 df["CAT"] = df["IssueType"].map(lambda x: encode_label(x))
 df
@@ -983,7 +982,6 @@ def init_experiment(experiment_name):
         return mlflow.set_experiment(experiment_name).experiment_id
     else:
         return mlflow.create_experiment(experiment_name)
-        # artifact_location = "/Users/Chris.Jose@cvent.com/test_result_analysis/experiments")
 
 # COMMAND ----------
 
@@ -1033,7 +1031,6 @@ def train_classifier(config):
     :param model_params: Dictionary of model parameters to train/evaluate the model.
     """
     mlflow.end_run()
-    #experiment_id = init_experiment("dbfs:/FileStore/shared_uploads/Chris.Jose@cvent.com/test_result_analysis/experiments")
 
     experiment_id = init_experiment("/Users/Chris.Jose@cvent.com/test_result_analysis/experiments/test_result_analysis_2")
     #experiment = mlflow.get_experiment(experiment_id)
@@ -1258,10 +1255,6 @@ metrics_path = os.path.join(config["metrics"]["metrics_folder"], config["metrics
 # COMMAND ----------
 
 print_gpu_utilization()
-
-# COMMAND ----------
-
-# MAGIC %sh python /Workspace/Repos/Chris.Jose@cvent.com/auto-result-analysis/cuda_profile.py > out.txt
 
 # COMMAND ----------
 
